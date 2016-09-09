@@ -16,7 +16,7 @@ POT		center to LCD pin3 (10K POT)
 		left to gnd | - one side to 5V one to Gnd
 		right to 5V |
 
-Clock: - (I2C)
+Clock: (I2C)
 SDA		A4		data
 SCL		A5		clock
 */
