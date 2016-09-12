@@ -1,5 +1,6 @@
 /*
-LCD circuit:
+- The circuit
+LCD
 pin		LCD		Arduinio Pin
 1		Gnd		Gnd
 2		5V		5V
