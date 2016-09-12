@@ -29,7 +29,7 @@ SCL		A5		clock
 // initialize the LCD library with the numbers of the interface pins
 LiquidCrystal lcd(7, 8, 9, 10, 11, 12);
 
-char *hiBruce = "Hi Bruce!";
+char *hiBruce = "Hi Bruce!       ";
 char *needO3 = "Need a O3 sensor";
 bool firstMessage = true;
 
@@ -40,8 +40,8 @@ enum ClockRow
 	bottom,
 };
 
-// clock returns an int for the weekday 0 - 6
-char *weekdayTable[] = { "Sun", "Mon", "Tue", "Wed", "Thr", "Fri", "Sat" };
+// clock returns an int for the weekday 1 - 7
+char *weekdayTable[] = { "Mon", "Tue", "Wed", "Thr", "Fri", "Sat", "Sun" };
 
 // store the last time values, set to -1 so all time values are displayed on load
 uint8_t lastSec = -1;
@@ -65,7 +65,7 @@ void setup()
 	Serial.begin(9600);
 	Wire.begin();
 
-	//clock->SetDateTime(0, 12, 22, 0, 4, 9, 16);
+	clock->SetDateTime(0, 27, 17, 7, 11, 9, 16);
 
 	// set up the LCD's number of (columns, rows)
 	lcd.begin(16, 2);
@@ -116,7 +116,7 @@ void displayTime()
 	// weekday
 	if (lastWeekDay != clock->weekDay)
 	{
-		lcd.print(weekdayTable[clock->weekDay]);
+		lcd.print(weekdayTable[clock->weekDay - 1]);
 		lastWeekDay = clock->weekDay;
 	}
 
@@ -152,7 +152,7 @@ void displayTime()
 		{
 			// double digit
 			lcd.setCursor(7, cr);
-			lcd.print(clock->month);
+			lcd.print(clock->monthDay);
 		}
 	}
 
