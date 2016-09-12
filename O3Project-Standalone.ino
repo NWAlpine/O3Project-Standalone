@@ -20,12 +20,22 @@ POT		center to LCD pin3 (10K POT)
 Clock: (I2C)
 SDA		A4		data
 SCL		A5		clock
+
+IR Sensor
+A0		Analog output that varies from 3.1V at 4cm to 0.3V at 30cm with a supply voltage between 4.5 and 5.5VDC
+		http://bildr.org/2011/03/various-proximity-sensors-arduino/
+		https://www.sparkfun.com/products/12728
+
 */
 
 // include the library code:
 #include <LiquidCrystal.h>	// LCD
 #include "Wire.h"			// I2C = clock
 #include "Clock.h"			// eric's clock methods
+
+// IR sensor pin
+uint8_t irPin = A0;
+int irValue = 0;
 
 // initialize the LCD library with the numbers of the interface pins
 LiquidCrystal lcd(7, 8, 9, 10, 11, 12);
@@ -63,6 +73,8 @@ ClockRow cr = bottom;
 
 void setup()
 {
+	pinMode(irPin, INPUT);
+
 	Serial.begin(9600);
 	Wire.begin();
 
@@ -103,6 +115,19 @@ void loop()
 			lcd.print(hiBruce);
 		}
 		firstMessage = !firstMessage;
+	}
+
+	// read the IR sensor
+	irValue = analogRead(irPin);
+	Serial.println(irValue);
+
+	if (irValue > 400)
+	{
+		Serial.println("Closed");
+	}
+	else
+	{
+		Serial.println("Open");
 	}
 
 	clock->GetDateTime();
