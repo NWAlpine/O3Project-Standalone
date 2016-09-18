@@ -55,7 +55,7 @@ enum ClockRow
 char *weekdayTable[] = { "Sun", "Mon", "Tue", "Wed", "Thr", "Fri", "Sat" };
 
 // store the last time values, set to -1 so all time values are displayed on load
-uint8_t lastSec = -1;
+//uint8_t lastSec = -1;
 uint8_t lastMin = -1;
 uint8_t lastHr = -1;
 uint8_t lastWeekDay = -1;
@@ -162,6 +162,8 @@ void displayTime()
 			lcd.setCursor(4, cr);
 			lcd.print(clock->month);
 		}
+
+		lastMonth = clock->month;
 	}
 
 	if (lastMonthDay != clock->monthDay)
@@ -180,6 +182,8 @@ void displayTime()
 			lcd.setCursor(7, cr);
 			lcd.print(clock->monthDay);
 		}
+
+		lastMonthDay = clock->monthDay;
 	}
 
 	if (lastHr != clock->hour)
@@ -198,6 +202,8 @@ void displayTime()
 			lcd.setCursor(10, cr);
 			lcd.print(clock->hour);
 		}
+
+		lastHr = clock->hour;
 	}
 
 	if (lastMin != clock->minute)
@@ -216,6 +222,8 @@ void displayTime()
 			lcd.setCursor(13, cr);
 			lcd.print(clock->minute);
 		}
+
+		lastMin = clock->minute;
 	}
 }
 
