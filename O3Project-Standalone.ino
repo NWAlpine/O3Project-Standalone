@@ -52,7 +52,7 @@ enum ClockRow
 };
 
 // clock returns an int for the weekday 1 - 7
-char *weekdayTable[] = { "Mon", "Tue", "Wed", "Thr", "Fri", "Sat", "Sun" };
+char *weekdayTable[] = { "Sun", "Mon", "Tue", "Wed", "Thr", "Fri", "Sat" };
 
 // store the last time values, set to -1 so all time values are displayed on load
 uint8_t lastSec = -1;
@@ -78,7 +78,7 @@ void setup()
 	Serial.begin(9600);
 	Wire.begin();
 
-	clock->SetDateTime(0, 27, 17, 7, 11, 9, 16);
+	//clock->SetDateTime(0, 34, 21, 7, 17, 9, 16);
 
 	// set up the LCD's number of (columns, rows)
 	lcd.begin(16, 2);
@@ -142,7 +142,7 @@ void displayTime()
 	// weekday
 	if (lastWeekDay != clock->weekDay)
 	{
-		lcd.print(weekdayTable[clock->weekDay - 1]);
+		lcd.print(weekdayTable[clock->weekDay - 1]); // week day is 1 - 7 -> sunday(1) - saturday(7)
 		lastWeekDay = clock->weekDay;
 	}
 
